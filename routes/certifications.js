@@ -7,9 +7,8 @@ const supabase = require('../configuration/supabaseConfig');
 router.get('/', async(req, res) => {
   try {
     const { data, error } = await supabase
-        .from('skills')
-        .select()
-        .order('skill', { ascending: true });
+        .from('certifications')
+        .select();
     return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json({ error});
