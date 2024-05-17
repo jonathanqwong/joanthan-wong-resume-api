@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const supabase = require('../configuration/supabaseConfig');
+const supabase = require('../../configuration/supabaseConfig');
 
-exports.educationController = {
-  /* GET education listing. */
-  getEducation: router.get('/education', async(req, res) => {
+exports.skillsController = {
+  /* GET skills listing. */
+  getSkills: router.get('/skills', async(req, res) => {
     try {
       const { data, error } = await supabase
-          .from('education')
+          .from('skills')
           .select()
-          .order('id', { ascending: false });
+          .order('skill', { ascending: true });
       return res.status(200).json(data);
     } catch (error) {
       return res.status(500).json({ error});

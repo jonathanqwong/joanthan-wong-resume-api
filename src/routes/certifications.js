@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const supabase = require('../configuration/supabaseConfig');
+const supabase = require('../../configuration/supabaseConfig');
 
 exports.certificationsController = {
   /* GET certification listing. */

@@ -2,12 +2,12 @@
   "name": "jonawong-wong-resume-api",
   "private": true,
   "scripts": {
-    "start": "node index.js",
-    "start-dev": "nodemon index.js",
+    "start": "node src/index.js",
+    "start-dev": "nodemon src/index.js",
     "start-debug": "DEBUG=jonawong-wong-resume-api:* npm start",
     "deploy": "firebase deploy --only functions:api"
   },
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
     "@supabase/supabase-js": "^2.43.1",
     "cors": "^2.8.5",

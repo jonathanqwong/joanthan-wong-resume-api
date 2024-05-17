@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const supabase = require('../configuration/supabaseConfig');
+const supabase = require('../../configuration/supabaseConfig');
 
-exports.experiencesController = {
-  /* GET experiences listing. */
-  getExperiences: router.get('/experiences', async(req, res) => {
+exports.educationController = {
+  /* GET education listing. */
+  getEducation: router.get('/education', async(req, res) => {
     try {
       const { data, error } = await supabase
-          .from('experiences')
+          .from('education')
           .select()
           .order('id', { ascending: false });
       return res.status(200).json(data);
@@ -16,5 +16,3 @@ exports.experiencesController = {
     }
   })
 }
-
-
