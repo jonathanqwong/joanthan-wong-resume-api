@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const functions = require('firebase-functions');
 const helmet = require('helmet');
 const index = express();
 const port = 3000;
@@ -26,4 +27,5 @@ index.listen(port, () => {
     console.log(`Example app listening on ${port}`)
 });
 
-// exports.index = functions.https.onRequest(index);
+// export api and use functions. Refer to package.json npmn run deploy.
+exports.api = functions.https.onRequest(index);

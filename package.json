@@ -5,7 +5,7 @@
     "start": "node index.js",
     "start-dev": "nodemon index.js",
     "start-debug": "DEBUG=jonawong-wong-resume-api:* npm start",
-    "deploy": "firebase deploy --only functions"
+    "deploy": "firebase deploy --only functions:api"
   },
   "main": "index.js",
   "dependencies": {
