@@ -10,9 +10,12 @@ exports.educationController = {
           .from('education')
           .select()
           .order('id', { ascending: false });
-      return res.status(200).json(data);
+      if (error) {
+        throw error;
+      }
+      return res.status(200).json({ data });
     } catch (error) {
-      return res.status(500).json({ error});
+      return res.status(500).json({ error: error.message });
     }
   })
 }
