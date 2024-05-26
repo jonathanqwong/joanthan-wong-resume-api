@@ -18,10 +18,6 @@ index.use(cors());
 index.use(express.json());
 index.use(helmet());
 
-index.get('/', (req, res) => {
-    res.send('hello world');
-});
-
 index.post('/contact', contactController.postContact);
 index.get('/certifications', certificationsController.getCertifications);
 index.get('/education', educationController.getEducation);
