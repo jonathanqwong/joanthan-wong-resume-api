@@ -10,7 +10,7 @@ const postContact = async (req, res) => {
     }
 
     try {
-        const { first_name, last_name, email } = req.body;
+        const { name, email, message } = req.body;
         const { data, error } = await supabase
             .from('contact')
             .insert([{ name, email, message }])
