@@ -13,7 +13,7 @@ const postContact = async (req, res) => {
         const { first_name, last_name, email } = req.body;
         const { data, error } = await supabase
             .from('contact')
-            .insert([{ first_name, last_name, email }])
+            .insert([{ name, email, message }])
             .select();
         if (error) {
             throw error;
@@ -27,9 +27,10 @@ const postContact = async (req, res) => {
 exports.contactController = {
     /* POST contact listing. */
     postContact: router.post('/contact', [
-            body('first_name').notEmpty().withMessage('First name is required'),
-            body('last_name').notEmpty().withMessage('Last name is required'),
-            body('email').isEmail().withMessage('Email is invalid')
+            body('name').notEmpty().withMessage('Name is required'),
+            body('email').isEmail().withMessage('Email is invalid'),
+            body('message').notEmpty().withMessage('Message is required')
+
         ],
         postContact
     )
