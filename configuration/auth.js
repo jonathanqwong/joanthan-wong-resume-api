@@ -10,4 +10,18 @@ const checkJwt = auth({
     tokenSigningAlg: 'RS256'
 });
 
-module.exports = checkJwt;
+// Error handling for JWT
+const handleJwtErrors = (err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        // Custom error response for unauthorized requests
+        res.status(401).json({
+            status: 'error',
+            code: 401,
+            message: 'Unauthorized.'
+        });
+    } else {
+        next(err);
+    }
+};
+
+module.exports = { checkJwt, handleJwtErrors };

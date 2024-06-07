@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const supabase = require('../../configuration/supabaseConfig');
-const checkJwt  = require('../../configuration/auth');
+const { checkJwt }  = require('../../configuration/auth');
 
 const postContact = async (req, res) => {
     const errors = validationResult(req);

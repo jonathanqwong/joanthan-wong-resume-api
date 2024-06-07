@@ -4,7 +4,7 @@ const cors = require('cors');
 const functions = require('firebase-functions');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const csurf = require('csurf');
+const { handleJwtErrors }  = require('../configuration/auth');
 
 const index = express();
 const port = 3000;
@@ -23,6 +23,7 @@ const { educationController } = require('./routes/education');
 const { experiencesController } = require('./routes/experiences');
 const { skillsController } = require('./routes/skills');
 
+index.use(handleJwtErrors);
 index.use(bodyParser.json());
 index.use(cors(corsOptions));
 index.use(express.json());
@@ -34,6 +35,11 @@ index.get('/certifications', certificationsController.getCertifications);
 index.get('/education', educationController.getEducation);
 index.get('/experiences', experiencesController.getExperiences);
 index.get('/skills', skillsController.getSkills);
+
+index.use(function(err, req, res, next){
+    console.error(err.stack);
+    return handleJwtErrors(err, req, res, next);
+});
 
 index.listen(port, () => {
     console.log(`Example app listening on ${port}`)
