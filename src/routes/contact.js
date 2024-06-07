@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const supabase = require('../../configuration/supabaseConfig');
+const checkJwt  = require('../../configuration/auth');
 
 const postContact = async (req, res) => {
     const errors = validationResult(req);
@@ -26,7 +27,7 @@ const postContact = async (req, res) => {
 
 exports.contactController = {
     /* POST contact listing. */
-    postContact: router.post('/contact', [
+    postContact: router.post('/contact', checkJwt, [
             body('name').notEmpty().withMessage('Name is required'),
             body('email').isEmail().withMessage('Email is invalid'),
             body('message').notEmpty().withMessage('Message is required')

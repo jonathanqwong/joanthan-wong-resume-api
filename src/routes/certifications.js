@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const supabase = require('../../configuration/supabaseConfig');
+const checkJwt  = require('../../configuration/auth');
 
 exports.certificationsController = {
   /* GET certification listing. */
-  getCertifications: router.get('/certifications', async(req, res) => {
+  getCertifications: router.get('/certifications', checkJwt, async(req, res) => {
     try {
+      const { userId } = req;
       const { data, error } = await supabase
           .from('certifications')
           .select();
