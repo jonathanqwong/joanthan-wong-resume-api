@@ -5,16 +5,17 @@ const functions = require('firebase-functions');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { handleJwtErrors }  = require('../configuration/auth');
+const { ORIGIN} = require("../configuration/configs");
 
 const index = express();
 const port = 3000;
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+    max: 75 // limit each IP to 100 requests per windowMs
 });
 const corsOptions =  {
-    origin: '*',  // This allows all origins. Replace '*' with your specific domain in production.
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: ORIGIN,  // This allows all origins. Replace '*' with your specific domain in production.
+    methods: 'GET,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204
 };

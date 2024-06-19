@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const supabase = require('../../configuration/supabaseConfig');
-const { checkJwt }  = require('../../configuration/auth');
+// const { checkJwt }  = require('../../configuration/auth');
 
 exports.certificationsController = {
   /* GET certification listing. */
