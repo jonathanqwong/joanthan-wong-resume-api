@@ -12,7 +12,7 @@ const index = express();
 const port = 3000;
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 75 // limit each IP to 100 requests per windowMs
+    max: 30 // limit each IP to 100 requests per windowMs
 });
 const corsOptions =  {
     origin: `${ORIGIN},${devOrigin}`,  // This allows all origins. Replace '*' with your specific domain in production.
