@@ -13,7 +13,10 @@ const limiter = rateLimit({
     max: 100 // limit each IP to 100 requests per windowMs
 });
 const corsOptions =  {
-    origin: process.env.AUTH0_ISSUER_BASE_URL
+    origin: 'http://localhost:3000',  // This allows all origins. Replace '*' with your specific domain in production.
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 };
 
 // Import controllers
