@@ -5,7 +5,7 @@ const { checkJwt }  = require('../../configuration/auth');
 
 exports.educationController = {
   /* GET education listing. */
-  getEducation: router.get('/education', checkJwt, async(req, res) => {
+  getEducation: router.get('/education', async(req, res) => {
     try {
       const { data, error } = await supabase
           .from('education')

@@ -27,7 +27,7 @@ const postContact = async (req, res) => {
 
 exports.contactController = {
     /* POST contact listing. */
-    postContact: router.post('/contact', checkJwt, [
+    postContact: router.post('/contact', [
             body('name').notEmpty().withMessage('Name is required'),
             body('email').isEmail().withMessage('Email is invalid'),
             body('message').notEmpty().withMessage('Message is required')

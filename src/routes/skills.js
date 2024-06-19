@@ -5,7 +5,7 @@ const { checkJwt }  = require('../../configuration/auth');
 
 exports.skillsController = {
   /* GET skills listing. */
-  getSkills: router.get('/skills', checkJwt, async(req, res) => {
+  getSkills: router.get('/skills', async(req, res) => {
     try {
       const { data, error } = await supabase
           .from('skills')
