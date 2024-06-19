@@ -15,7 +15,7 @@ const limiter = rateLimit({
     max: 30 // limit each IP to 100 requests per windowMs
 });
 const corsOptions =  {
-    origin: `${ORIGIN},${devOrigin}`,  // This allows all origins. Replace '*' with your specific domain in production.
+    origin: [ORIGIN,devOrigin],  // This allows all origins. Replace '*' with your specific domain in production.
     methods: 'GET,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204
