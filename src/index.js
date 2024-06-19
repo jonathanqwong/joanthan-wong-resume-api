@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { handleJwtErrors }  = require('../configuration/auth');
 const { ORIGIN} = require("../configuration/configs");
+const devOrigin = 'http://localhost:3000'l
 
 const index = express();
 const port = 3000;
@@ -14,7 +15,7 @@ const limiter = rateLimit({
     max: 75 // limit each IP to 100 requests per windowMs
 });
 const corsOptions =  {
-    origin: ORIGIN,  // This allows all origins. Replace '*' with your specific domain in production.
+    origin: `${ORIGIN},${devOrigin}`,  // This allows all origins. Replace '*' with your specific domain in production.
     methods: 'GET,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204
