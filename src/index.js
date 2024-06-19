@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { handleJwtErrors }  = require('../configuration/auth');
 const { ORIGIN} = require("../configuration/configs");
-const devOrigin = 'http://localhost:3000'l
+const devOrigin = 'http://localhost:3000';
 
 const index = express();
 const port = 3000;
