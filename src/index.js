@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const functions = require('firebase-functions');
-const onSchedule = require("firebase-functions/v2/scheduler");
+const { onSchedule } = require("firebase-functions/v2/scheduler");
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { handleJwtErrors }  = require('../configuration/auth');
@@ -53,8 +53,8 @@ index.listen(port, () => {
 
 
 // Scheduled function to run every week
-// exports.scheduledFunctions = functions.pubsub.schedule('every monday 00:00').timeZone('UTC').onRun(async (context) => {
-exports.scheduledFunctions = functions.pubsub.schedule('every 5 minutes').timeZone('UTC').onRun(async (context) => {
+// exports.scheduledFunctions = onSchedule('every monday 00:00', async (event) => {
+exports.weeklyApiJob = onSchedule('every 5 minutes', async (event) => {
     try {
         const response = await axios.get(`${devOrigin}/skills`);
         const data = response.data;
