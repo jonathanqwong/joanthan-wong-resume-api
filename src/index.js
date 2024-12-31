@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const functions = require('firebase-functions');
+const onSchedule = require("firebase-functions/v2/scheduler");
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { handleJwtErrors }  = require('../configuration/auth');
@@ -48,6 +49,24 @@ index.use(function(err, req, res, next){
 
 index.listen(port, () => {
     console.log(`Example app listening on ${port}`)
+});
+
+
+// Scheduled function to run every week
+// exports.scheduledFunctions = functions.pubsub.schedule('every monday 00:00').timeZone('UTC').onRun(async (context) => {
+exports.scheduledFunctions = functions.pubsub.schedule('every 5 minutes').timeZone('UTC').onRun(async (context) => {
+    try {
+        const response = await axios.get(`${devOrigin}/skills`);
+        const data = response.data;
+
+        // Process the data as needed
+        console.log('API call successful:', data);
+
+        return null;
+    } catch (error) {
+        console.error('API call failed:', error);
+        throw new Error('API call failed');
+    }
 });
 
 // export api and use functions. Refer to package.json npmn run deploy.
