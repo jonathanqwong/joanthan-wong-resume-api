@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const functions = require('firebase-functions');
+const functions = require('firebase-functions/v1');
 const { onSchedule } = require("firebase-functions/v2/scheduler");
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -69,5 +69,5 @@ exports.weeklyApiJob = onSchedule('every 5 minutes', async (event) => {
     }
 });
 
-// export api and use functions. Refer to package.json npmn run deploy.
+// export api and use functions. Refer to package.json npm run deploy.
 exports.api = functions.https.onRequest(index);
