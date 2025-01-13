@@ -5,9 +5,10 @@ const functions = require('firebase-functions/v1');
 const { onSchedule } = require("firebase-functions/v2/scheduler");
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const axios = require('axios')
 const { handleJwtErrors }  = require('../configuration/auth');
-const { ORIGIN} = require("../configuration/configs");
-const devOrigin = 'http://localhost:3000';
+const { ORIGIN, ENDPOINT } = require("../configuration/configs");
+const devOrigin = 'http://localhost:3000';;
 
 const index = express();
 const port = 3000;
@@ -55,7 +56,7 @@ index.listen(port, () => {
 // Scheduled function to run every week
 exports.weeklyApiJob = onSchedule('every 2 minutes', async (event) => {
     try {
-        const response = await skillsController.getSkills();
+        const response = await axios.get(ENDPOINT + '/api/skills')
         const data = response;
 
         // Process the data as needed
