@@ -57,7 +57,7 @@ index.listen(port, () => {
 exports.weeklyApiJob = onSchedule('every 2 minutes', async (event) => {
     try {
         const response = await axios.get(ENDPOINT + '/api/skills')
-        const data = response;
+        const data = JSON.stringify(response.data);
 
         // Process the data as needed
         console.log('API call response:', response);
