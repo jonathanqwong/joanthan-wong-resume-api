@@ -54,7 +54,7 @@ index.listen(port, () => {
 
 
 // Scheduled function to run every week
-exports.weeklyApiJob = onSchedule('every 2 minutes', async (event) => {
+exports.weeklyApiJob = onSchedule('every 72 hours', async (event) => {
     try {
         const response = await axios.get(ENDPOINT + '/api/skills')
         const data = JSON.stringify(response.data);
