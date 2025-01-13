@@ -55,7 +55,7 @@ index.listen(port, () => {
 // Scheduled function to run every week
 exports.weeklyApiJob = onSchedule('every 2 minutes', async (event) => {
     try {
-        const response = await skillsController.getSkills;
+        const response = await skillsController.getSkills();
         const data = response;
 
         // Process the data as needed
