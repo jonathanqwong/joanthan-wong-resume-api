@@ -53,9 +53,9 @@ index.listen(port, () => {
 
 
 // Scheduled function to run every week
-exports.weeklyApiJob = onSchedule('every 72 hours', async (event) => {
+exports.weeklyApiJob = onSchedule('every 2 minutes', async (event) => {
     try {
-        const response = await axios.get(`${devOrigin}/skills`);
+        const response = await index.get('/skills', skillsController.getSkills);
         const data = response.data;
 
         // Process the data as needed
@@ -63,8 +63,10 @@ exports.weeklyApiJob = onSchedule('every 72 hours', async (event) => {
 
         return null;
     } catch (error) {
-        console.error('API call failed:', error);
-        throw new Error('API call failed');
+        console.error('API call failed:', error.message);
+        console.error('Stack trace:', error.stack);
+
+        return null;
     }
 });
 
