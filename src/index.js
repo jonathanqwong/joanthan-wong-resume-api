@@ -59,6 +59,7 @@ exports.weeklyApiJob = onSchedule('every 2 minutes', async (event) => {
         const data = response.data;
 
         // Process the data as needed
+        console.log('API call response:', response);
         console.log('API call successful:', data);
 
         return null;
