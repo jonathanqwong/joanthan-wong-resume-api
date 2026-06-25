@@ -53,8 +53,8 @@ index.listen(port, () => {
 });
 
 
-// Scheduled function to run every week
-exports.weeklyApiJob = onSchedule('every 72 hours', async (event) => {
+// Scheduled function to keep Supabase active (pauses after 7 days inactivity)
+exports.cronApiJob = onSchedule('every 48 hours', async (event) => {
     try {
         const response = await axios.get(ENDPOINT + '/api/skills')
         const data = JSON.stringify(response.data);
