@@ -1,8 +1,11 @@
+.claude
 .env
 .DS_Store
 .github/
 .idea/
 node_modules/
 node_modules/*
+resources/
+resources/*
 
 

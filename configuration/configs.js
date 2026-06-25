@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL;
-const SUPABASE_KEY = process.env.REACT_APP_SUPABASE_KEY;
+const SUPABASE_KEY = process.env.REACT_APP_SUPABASE_PUBLISHABLE_KEY;
 const AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 const ISSUER_BASE_URL = process.env.REACT_APP_AUTH0_ISSUER_BASE_URL;
 const ORIGIN = process.env.REACT_APP_ORIGIN;

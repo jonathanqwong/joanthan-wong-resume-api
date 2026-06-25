@@ -12,6 +12,16 @@ const postContact = async (req, res) => {
 
     try {
         const { name, email, message } = req.body;
+
+        const { count } = await supabase
+            .from('contact')
+            .select('*', { count: 'exact', head: true })
+            .eq('email', email);
+
+        if (count >= 2) {
+            return res.status(429).json({ error: 'Max submissions reached for this email.' });
+        }
+
         const { data, error } = await supabase
             .from('contact')
             .insert([{ name, email, message }])
