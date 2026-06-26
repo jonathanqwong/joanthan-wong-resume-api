@@ -8,13 +8,20 @@ const rateLimit = require('express-rate-limit');
 const axios = require('axios')
 const { handleJwtErrors }  = require('../configuration/auth');
 const { ORIGIN, ENDPOINT } = require("../configuration/configs");
-const devOrigin = 'http://localhost:3000';;
+const devOrigin = 'http://localhost:3000';
 
 const index = express();
 const port = 3000;
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 30 // limit each IP to 100 requests per windowMs
+    windowMs: 60 * 60 * 1000, // 15 minutes
+    max: 30,
+    message: { error: 'Too many requests, please try again later.' }
+});
+
+const contactLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 2,
+    message: { error: 'Too many contact submissions, please try again later.' }
 });
 const corsOptions =  {
     origin: [ORIGIN,devOrigin],  // This allows all origins. Replace '*' with your specific domain in production.
@@ -37,7 +44,7 @@ index.use(express.json());
 index.use(helmet());
 index.use(limiter);
 
-index.post('/contact', contactController.postContact);
+index.post('/contact', contactLimiter, contactController.postContact);
 index.get('/certifications', certificationsController.getCertifications);
 index.get('/education', educationController.getEducation);
 index.get('/experiences', experiencesController.getExperiences);
@@ -54,7 +61,7 @@ index.listen(port, () => {
 
 
 // Scheduled function to keep Supabase active (pauses after 7 days inactivity)
-exports.cronApiJob = onSchedule('every 48 hours', async (event) => {
+exports.weeklyApiJob = onSchedule('every 48 hours', async (event) => {
     try {
         const response = await axios.get(ENDPOINT + '/api/skills')
         const data = JSON.stringify(response.data);
